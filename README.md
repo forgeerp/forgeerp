@@ -1,179 +1,143 @@
 # ForgeERP
 
-Sistema de infraestrutura para gestão de deploy e provisionamento de infraestrutura de forma simples e automatizada.
+Infrastructure management system for simple and automated deployment and infrastructure provisioning.
 
-## 🎯 O que fazemos
+## 🎯 What We Do
 
-**Automação completa de deploy e infraestrutura.**
+**Complete deployment and infrastructure automation.**
 
-Do clone ao ambiente pronto com um comando. Pipelines e infraestrutura são configurados automaticamente. Com GitHub Actions configurados automaticamente, infraestrutura como código, e automação total, você foca no que importa: seu produto.
+From clone to production-ready environment with a single command. Pipelines and infrastructure are configured automatically. With GitHub Actions configured automatically, infrastructure as code, and total automation, you focus on what matters: your product.
 
-### ✨ Principais Funcionalidades
+### ✨ Key Features
 
-- **🚀 Deploy em minutos** - Setup de semanas para minutos, sem trabalho manual
-- **⚙️ Automação total** - GitHub Actions configurados automaticamente para cada cliente
-- **🔒 Infraestrutura como código** - Tudo versionado, auditável e reproduzível
-- **📊 Estimativas precisas** - Ferramentas que ajudam na decisão técnica
-- **🔄 Backup automático** - Disaster recovery integrado
-- **🔐 SSL automático** - Certificados renovados automaticamente
-- **📈 Monitoramento** - Health checks e alertas configurados
-- **🎯 Multi-provedor** - Hetzner, AWS, GCP, Azure e mais
+- **🚀 Deploy in minutes** - Setup from weeks to minutes, without manual work
+- **⚙️ Total automation** - GitHub Actions configured automatically for each client
+- **🔒 Infrastructure as code** - Everything versioned, auditable, and reproducible
+- **📊 Accurate estimates** - Tools that help with technical decisions
+- **🔄 Automatic backup** - Integrated disaster recovery
+- **🔐 Automatic SSL** - Certificates renewed automatically
+- **📈 Monitoring** - Health checks and alerts configured
+- **🎯 Multi-provider** - Hetzner, AWS, GCP, Azure and more
 
-## 🧠 Princípios de Engenharia
+## 🧠 Engineering Principles
 
-- **Simplicidade primeiro** — Arquitetura mínima para entregar valor com clareza
-- **Automação por padrão** — Tudo o que pode ser automatizado, será
-- **Observabilidade nativa** — Saúde e métricas disponíveis desde o dia 1
-- **Configuração declarativa** — Reprodutível, auditável, versionada
-- **Seguro por padrão** — SSL automático, segredos, permissões
-- **Modularidade** — Habilite apenas o que precisa, quando precisa
+- **Simplicity first** — Minimal architecture to deliver value with clarity
+- **Automation by default** — Everything that can be automated, will be
+- **Native observability** — Health and metrics available from day 1
+- **Declarative configuration** — Reproducible, auditable, versioned
+- **Secure by default** — Automatic SSL, secrets, permissions
+- **Modularity** — Enable only what you need, when you need it
 
-## 🌟 Por que usar o ForgeERP?
+## 🌟 Why Use ForgeERP?
 
-### 🚀 Automação Completa
+### 🚀 Complete Automation
 
-- **Deploy automatizado** — GitHub Actions prontos para uso
-- **Infraestrutura como código** — Reprodutível e auditável
-- **Backup automático** — Sem intervenção manual
-- **SSL automático** — Renovação contínua
-- **Monitoramento automático** — Health checks e alertas
+- **Automated deployment** — GitHub Actions ready to use
+- **Infrastructure as code** — Reproducible and auditable
+- **Automatic backup** — No manual intervention
+- **Automatic SSL** — Continuous renewal
+- **Automatic monitoring** — Health checks and alerts
 
-### 💎 Qualidade Profissional
+### 💎 Professional Quality
 
-- **Enterprise-grade** — Boas práticas desde o primeiro commit
-- **Multi-provedor** — Hetzner, AWS, GCP, Azure e mais
-- **Escalável** — 1 a 100+ clientes
-- **Seguro** — Boas práticas aplicadas automaticamente
-- **Documentado** — Documentação sempre atualizada
+- **Enterprise-grade** — Best practices from the first commit
+- **Multi-provider** — Hetzner, AWS, GCP, Azure and more
+- **Scalable** — 1 to 100+ clients
+- **Secure** — Best practices applied automatically
+- **Documented** — Documentation always up to date
 
-### 🔒 Código Aberto
+### 🔒 Open Source
 
-- **Fork público** — Transparência e colaboração
-- **PRs automáticos** — Melhorias retornam ao ecossistema
-- **Sem lock-in** — Você no controle
-- **Self-hosting opcional** — Flexibilidade total
-
-### 📊 Gestão Inteligente
-
-- **Ferramentas de decisão** — Estimativas que guiam escolhas técnicas
-- **Dashboard centralizado** — Gestão em um lugar
-- **Relatórios automáticos** — Uso e performance
-- **Alertas inteligentes** — Notificações proativas
-- **Histórico completo** — Auditoria de mudanças
+- **MIT License** — Use, modify, distribute freely
+- **Community-driven** — Contributions welcome
+- **Transparent** — All code is open and auditable
 
 ## 🚀 Quick Start
 
-### 1. Instalar Dependências
+### Prerequisites
+
+- Docker and Docker Compose
+- Git
+- GitHub CLI (optional, for GitHub integration)
+
+See [Installation Guide](docs/technical/INSTALLATION.md) for detailed instructions.
+
+### Installation
 
 ```bash
-# Ubuntu/Debian
-chmod +x scripts/install-ubuntu.sh && ./scripts/install-ubuntu.sh
-
-# Fedora/RHEL
-chmod +x scripts/install-fedora.sh && ./scripts/install-fedora.sh
-
-# macOS
-chmod +x scripts/install-macos.sh && ./scripts/install-macos.sh
-```
-
-**Ou instale manualmente**: Docker, Git, GitHub CLI, Python 3.11+, Node.js 18+.  
-Veja [docs/INSTALACAO.md](docs/INSTALACAO.md) para instruções detalhadas.
-
-### 2. Clonar e Configurar
-
-```bash
+# Clone the repository
 git clone https://github.com/forgeerp/forgeerp.git
 cd forgeerp
-cp .env.example .env
-# Edite o .env com suas configurações
-```
 
-### 3. Instalar CLI
-
-```bash
-cd cli
-pip install -e .
-```
-
-### 4. Subir a Aplicação
-
-```bash
+# Start the application
 forge up
 ```
 
-### 5. Criar Usuário Admin
+### First Access
+
+1. Access `http://localhost:8000`
+2. Login with default credentials:
+   - Username: `admin`
+   - Password: `admin`
+3. Create your first client
+4. Install modules
+5. Generate workflows
+
+See [Documentation](docs/README.md) for more details.
+
+## 📚 Documentation
+
+- **[Technical Documentation](docs/technical/README.md)** - Technical guides, CLI, and API
+- **[Functional Documentation](docs/functional/README.md)** - Daily GUI usage
+- **[Operational Documentation](docs/operational/README.md)** - Auto-generated guides
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React 19 + TypeScript + Vite + Tailwind CSS
+- **Backend**: FastAPI + SQLModel + SQLite
+- **CLI**: Typer + Rich
+- **Testing**: Pytest + Playwright
+- **Containerization**: Docker (unified image)
+
+## 🧪 Testing
 
 ```bash
-forge user
-```
-
-### 6. Acessar
-
-Abra http://localhost:3000 e faça login com:
-- **Username**: `admin`
-- **Password**: `admin`
-
-⚠️ **Altere a senha padrão após o primeiro login!**
-
-## 💻 Uso do CLI
-
-O ForgeERP CLI é a ferramenta principal para uso diário:
-
-```bash
-# Ver todos os comandos
-forge --help
-
-# Subir/parar aplicação
-forge up
-forge down
-
-# Ver status
-forge status
-
-# Ver logs
-forge logs
-forge logs --follow
-
-# Gerenciar usuários
-forge user --username admin --password senha123
-
-# Executar testes
+# Run all tests
 forge test
-forge test --unit
-forge test --coverage
 
-# Atualizar aplicação
-forge update
+# Run specific tests
+forge test --unit
+forge test --integration
+forge test --e2e
 ```
 
-Veja [docs/DAILY_USAGE.md](docs/DAILY_USAGE.md) para mais comandos.
+## 📝 Development
 
-## 📊 Comparação com Alternativas
+```bash
+# Start development environment
+forge up --build
 
-| Característica | **ForgeERP** | **odoo.sh** | **DIY Manual** |
-|---|---|---|---|
-| **Automação** | ✅ Total | ✅ Alta | ❌ Manual |
-| **Código Aberto** | ✅ Obrigatório | ❌ Proprietário | ✅ Sim |
-| **Self-Hosting** | ✅ Opcional | ❌ Não | ✅ Sim |
-| **Ferramentas de Decisão** | ✅ Precisas | ⚠️ Limitadas | ❌ Não |
-| **Multi-provedor** | ✅ Sim | ❌ Não | ⚠️ Manual |
+# Run tests
+forge test
 
-## 🎯 Pronto para engenharia
+# View logs
+forge logs --follow
+```
 
-Sem política. Sem distração. Tecnologia clara, moderna e objetiva para quem quer construir bem e rápido.
+## 🤝 Contributing
 
-## 📖 Documentação
+Contributions are welcome! Please read our contributing guidelines before submitting PRs.
 
-- **Uso diário**: [docs/DAILY_USAGE.md](docs/DAILY_USAGE.md)
-- **Documentação completa**: [docs/README.md](docs/README.md)
-- **Instalação detalhada**: [docs/INSTALACAO.md](docs/INSTALACAO.md)
-- **Scripts**: [scripts/README.md](scripts/README.md)
+## 📄 License
 
-## 📞 Suporte
+MIT License - see [LICENSE](LICENSE) file for details.
 
-- **Issues**: https://github.com/forgeerp/forgeerp/issues
-- **Documentação**: [docs/README.md](docs/README.md)
+## 🔗 Links
 
-## 📄 Licença
+- **Documentation**: [docs/README.md](docs/README.md)
+- **Installation**: [docs/technical/INSTALLATION.md](docs/technical/INSTALLATION.md)
+- **Daily Usage**: [docs/technical/DAILY_USAGE.md](docs/technical/DAILY_USAGE.md)
 
-MIT
+---
+
+**ForgeERP** - Infrastructure management made simple. 🚀
