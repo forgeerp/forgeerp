@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { api, Client } from '../lib/api';
 import { getCurrentUser, User } from '../lib/auth';
 
 export function Dashboard() {
+  const { t } = useTranslation();
   const [user, setUser] = useState<User | null>(null);
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,48 +32,48 @@ export function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-gray-600">Carregando...</div>
+        <div className="text-gray-600">{t('common.loading')}</div>
       </div>
     );
   }
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">Dashboard</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('dashboard.title')}</h2>
       
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Clientes</h3>
+          <h3 className="text-sm font-medium text-gray-500 mb-2">{t('dashboard.clients')}</h3>
           <p className="text-3xl font-bold text-gray-900">{clients.length}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Usuário</h3>
+          <h3 className="text-sm font-medium text-gray-500 mb-2">{t('dashboard.user')}</h3>
           <p className="text-lg font-semibold text-gray-900">{user?.role || 'N/A'}</p>
         </div>
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Status</h3>
-          <p className="text-lg font-semibold text-green-600">Ativo</p>
+          <h3 className="text-sm font-medium text-gray-500 mb-2">{t('dashboard.status')}</h3>
+          <p className="text-lg font-semibold text-green-600">{t('dashboard.active')}</p>
         </div>
       </div>
 
       {/* Clients List Preview */}
       <div className="bg-white rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Clientes Recentes</h3>
+          <h3 className="text-lg font-medium text-gray-900">{t('dashboard.recentClients')}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nome
+                  {t('clients.name')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Código
+                  {t('clients.code')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  {t('clients.status')}
                 </th>
               </tr>
             </thead>
@@ -79,7 +81,7 @@ export function Dashboard() {
               {clients.length === 0 ? (
                 <tr>
                   <td colSpan={3} className="px-6 py-4 text-center text-gray-500">
-                    Nenhum cliente cadastrado
+                    {t('clients.noClients')}
                   </td>
                 </tr>
               ) : (
@@ -99,7 +101,7 @@ export function Dashboard() {
                             : 'bg-red-100 text-red-800'
                         }`}
                       >
-                        {client.is_active ? 'Ativo' : 'Inativo'}
+                        {client.is_active ? t('dashboard.active') : 'Inactive'}
                       </span>
                     </td>
                   </tr>
@@ -112,4 +114,3 @@ export function Dashboard() {
     </div>
   );
 }
-

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { api, Configuration, ConfigurationCreate } from '../lib/api';
 
 export function Configurations() {
+  const { t } = useTranslation();
   const [configurations, setConfigurations] = useState<Configuration[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -27,7 +29,7 @@ export function Configurations() {
       setConfigurations(response.configurations);
       setError('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load configurations');
+      setError(err instanceof Error ? err.message : t('configurations.createError'));
     } finally {
       setLoading(false);
     }
@@ -51,7 +53,7 @@ export function Configurations() {
       await loadConfigurations();
       resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to save configuration');
+      setError(err instanceof Error ? err.message : t('configurations.updateError'));
     }
   };
 
@@ -67,7 +69,7 @@ export function Configurations() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!confirm('Tem certeza que deseja deletar esta configuração?')) {
+    if (!confirm(t('configurations.deleteConfirm'))) {
       return;
     }
 
@@ -75,7 +77,7 @@ export function Configurations() {
       await api.delete(`/api/v1/configurations/${id}`);
       await loadConfigurations();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete configuration');
+      setError(err instanceof Error ? err.message : t('configurations.deleteError'));
     }
   };
 
@@ -91,134 +93,132 @@ export function Configurations() {
   };
 
   if (loading) {
-    return <div className="text-gray-600">Carregando configurações...</div>;
+    return <div className="text-gray-600">{t('common.loading')}</div>;
   }
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Configurações</h2>
+        <h2 className="text-2xl font-bold text-gray-800">{t('configurations.title')}</h2>
         <button
-          onClick={() => setShowForm(!showForm)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => setShowForm(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
         >
-          {showForm ? 'Cancelar' : 'Nova Configuração'}
+          + {t('configurations.newConfiguration')}
         </button>
       </div>
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
           {error}
         </div>
       )}
 
+      {/* Form */}
       {showForm && (
-        <div className="bg-white p-6 rounded-lg shadow mb-6">
+        <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            {editingId ? 'Editar Configuração' : 'Nova Configuração'}
+            {editingId ? t('configurations.editConfiguration') : t('configurations.newConfiguration')}
           </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Chave
-              </label>
-              <input
-                type="text"
-                value={formData.key}
-                onChange={(e) => setFormData({ ...formData, key: e.target.value })}
-                required
-                disabled={!!editingId}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
-                placeholder="ex: github_token"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('configurations.key')} *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.key}
+                  onChange={(e) => setFormData({ ...formData, key: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder={t('configurations.key')}
+                  disabled={!!editingId}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('configurations.value')} *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.value}
+                  onChange={(e) => setFormData({ ...formData, value: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder={t('configurations.value')}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('configurations.valueType')}
+                </label>
+                <select
+                  value={formData.value_type}
+                  onChange={(e) => setFormData({ ...formData, value_type: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="string">String</option>
+                  <option value="number">Number</option>
+                  <option value="boolean">Boolean</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('configurations.description')}
+                </label>
+                <input
+                  type="text"
+                  value={formData.description || ''}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value || null })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder={t('configurations.description')}
+                />
+              </div>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Valor
-              </label>
-              <textarea
-                value={formData.value}
-                onChange={(e) => setFormData({ ...formData, value: e.target.value })}
-                required
-                rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Valor da configuração"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Tipo
-              </label>
-              <select
-                value={formData.value_type}
-                onChange={(e) => setFormData({ ...formData, value_type: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="string">String</option>
-                <option value="json">JSON</option>
-                <option value="integer">Integer</option>
-                <option value="boolean">Boolean</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Descrição (opcional)
-              </label>
-              <input
-                type="text"
-                value={formData.description || ''}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value || null })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Descrição da configuração"
-              />
-            </div>
-
-            <div className="flex gap-2">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {editingId ? 'Atualizar' : 'Criar'}
-              </button>
+            <div className="flex justify-end gap-3">
               <button
                 type="button"
                 onClick={resetForm}
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300"
               >
-                Cancelar
+                {t('common.cancel')}
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                {editingId ? t('common.update') : t('common.create')}
               </button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Configurations List */}
+      <div className="bg-white rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">
-            Configurações ({configurations.length})
-          </h3>
+          <h3 className="text-lg font-medium text-gray-900">{t('configurations.title')}</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Chave
+                  {t('configurations.key')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Valor
+                  {t('configurations.value')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Tipo
+                  {t('configurations.valueType')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Descrição
+                  {t('configurations.description')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Ações
+                  {t('common.actions')}
                 </th>
               </tr>
             </thead>
@@ -226,16 +226,16 @@ export function Configurations() {
               {configurations.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
-                    Nenhuma configuração cadastrada
+                    {t('configurations.noConfigurations')}
                   </td>
                 </tr>
               ) : (
                 configurations.map((config) => (
-                  <tr key={config.id}>
+                  <tr key={config.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {config.key}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {config.value}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -249,13 +249,13 @@ export function Configurations() {
                         onClick={() => handleEdit(config)}
                         className="text-blue-600 hover:text-blue-900 mr-4"
                       >
-                        Editar
+                        {t('common.edit')}
                       </button>
                       <button
                         onClick={() => handleDelete(config.id)}
                         className="text-red-600 hover:text-red-900"
                       >
-                        Deletar
+                        {t('common.delete')}
                       </button>
                     </td>
                   </tr>
@@ -268,4 +268,3 @@ export function Configurations() {
     </div>
   );
 }
-
