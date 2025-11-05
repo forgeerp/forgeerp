@@ -1,0 +1,52 @@
+# Cursor Rules for ForgeERP
+
+## TypeScript/React Configuration
+- Use TypeScript for all frontend code
+- Use React 19 with TypeScript
+- Use functional components with hooks
+- Use i18next for translations (t() function)
+- All UI text must use translation keys
+
+## Code Style
+- Use ESLint for linting
+- Use Prettier for formatting
+- Follow TypeScript strict mode
+- Use Tailwind CSS for styling
+- Use relative imports for local files
+
+## File Structure
+- Components in `frontend/src/components/`
+- Pages in `frontend/src/pages/`
+- Utilities in `frontend/src/lib/`
+- Translations in `frontend/src/i18n/locales/`
+
+## Naming Conventions
+- Components: PascalCase (e.g., `Clients.tsx`)
+- Files: Match component name
+- Functions: camelCase
+- Constants: UPPER_SNAKE_CASE
+- Types/Interfaces: PascalCase
+
+## React Patterns
+- Use `useTranslation()` from react-i18next for translations
+- Use `useState` and `useEffect` hooks
+- Use TypeScript interfaces for props
+- Export components as named exports
+
+## Import Order
+1. React imports
+2. Third-party imports
+3. Local imports (components, lib, etc.)
+4. Type imports
+
+## Error Handling
+- Use try-catch for async operations
+- Display user-friendly error messages
+- Use translation keys for error messages
+
+## TypeScript
+- Always define types for props
+- Use interfaces for component props
+- Avoid `any` type
+- Use type inference where possible
+
