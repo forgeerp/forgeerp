@@ -20,7 +20,7 @@ O workflow `.github/workflows/generate-docs.yml` executa automaticamente:
 A documentação visual inclui:
 - `docs/GUIA_VISUAL.md` - Markdown com screenshots
 - `docs/GUIA_VISUAL.html` - HTML visual
-- `docs/GUIA_PASSO_A_PASSO.md` - Guia detalhado passo a passo
+- `docs/operacional/STEP_BY_STEP_GUIDE.md` - Detailed step-by-step guide
 - `docs/screenshots/*.png` - Screenshots individuais
 
 ## 🔧 Scripts de Geração (Uso Interno)

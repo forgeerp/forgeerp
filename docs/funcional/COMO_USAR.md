@@ -70,7 +70,7 @@ Veja [GUIA_VISUAL.md](GUIA_VISUAL.md) para documentação visual com screenshots
 
 ### Guia Passo a Passo
 
-Veja [GUIA_PASSO_A_PASSO.md](GUIA_PASSO_A_PASSO.md) para instruções detalhadas passo a passo de como usar cada funcionalidade.
+See [STEP_BY_STEP_GUIDE.md](../operacional/STEP_BY_STEP_GUIDE.md) for detailed step-by-step instructions on how to use each feature.
 
 ## 💻 Uso do CLI
 
@@ -145,7 +145,7 @@ Veja [DAILY_USAGE.md](DAILY_USAGE.md) para mais comandos.
 - [INSTALACAO.md](INSTALACAO.md) - Instalação detalhada
 - [DAILY_USAGE.md](DAILY_USAGE.md) - Uso diário
 - [GUIA_VISUAL.md](GUIA_VISUAL.md) - Guia visual
-- [GUIA_PASSO_A_PASSO.md](GUIA_PASSO_A_PASSO.md) - Guia passo a passo
+- [STEP_BY_STEP_GUIDE.md](../operacional/STEP_BY_STEP_GUIDE.md) - Step-by-step guide
 
 ## 🔗 Links Úteis
 

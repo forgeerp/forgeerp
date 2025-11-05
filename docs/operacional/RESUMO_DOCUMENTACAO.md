@@ -31,7 +31,7 @@ python scripts/generate_docs_step_by_step.py
 ```
 
 **Gera:**
-- `docs/GUIA_PASSO_A_PASSO.md` - Guia completo
+- `docs/operacional/STEP_BY_STEP_GUIDE.md` - Complete guide
 - `docs/screenshots/*.png` - Screenshots de cada passo
 
 ### 3. Usar Makefile

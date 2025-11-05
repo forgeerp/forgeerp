@@ -101,7 +101,7 @@ class DocumentationGenerator:
         
         print(f"✅ Documentação gerada em: {md_path}")
     
-    def generate_step_by_step_markdown(self, filename: str = "GUIA_PASSO_A_PASSO.md"):
+    def generate_step_by_step_markdown(self, filename: str = "STEP_BY_STEP_GUIDE.md"):
         """Generate step-by-step markdown documentation"""
         md_path = self.output_dir.parent / filename
         md_path.parent.mkdir(parents=True, exist_ok=True)
@@ -277,5 +277,5 @@ def test_configuration_documentation(page: Page, docs_output_dir: Path, should_g
         return
     
     # Generate documentation
-    generator.generate_step_by_step_markdown("GUIA_PASSO_A_PASSO.md")
+           generator.generate_step_by_step_markdown("STEP_BY_STEP_GUIDE.md")
 
