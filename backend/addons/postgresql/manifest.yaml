@@ -1,0 +1,7 @@
+name: PostgreSQL
+description: PostgreSQL database implementation
+category: addon
+version: 0.1.0
+depends:
+  - database
+

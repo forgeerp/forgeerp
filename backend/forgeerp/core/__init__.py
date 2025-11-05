@@ -1,0 +1,2 @@
+"""Módulo core do ForgeERP"""
+

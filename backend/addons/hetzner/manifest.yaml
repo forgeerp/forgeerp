@@ -1,0 +1,7 @@
+name: Hetzner
+description: Hetzner Cloud provider implementation
+category: addon
+version: 0.1.0
+depends:
+  - providers
+

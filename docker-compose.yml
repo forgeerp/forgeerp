@@ -1,0 +1,44 @@
+version: '3.8'
+
+# ⚠️  NOTA: Use o CLI 'forge' para gerenciar a aplicação no dia a dia
+# Este arquivo docker-compose.yml é usado apenas internamente pelo CLI
+# Comandos: forge up, forge down, forge status, etc.
+
+services:
+  forgeerp:
+    # Imagem unificada (produção)
+    image: ghcr.io/forgeerp/forgeerp:latest
+    pull_policy: always
+    profiles: [prod]
+    
+    # Build local (desenvolvimento)
+    build:
+      context: .
+      dockerfile: Dockerfile
+    profiles: [dev]
+    
+    container_name: forgeerp
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data  # SQLite database
+      - ./backend:/app/backend  # Mount para desenvolvimento (hot reload)
+    environment:
+      - DATABASE_URL=sqlite:///app/data/forgeerp.db
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-key-change-in-production}
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GITHUB_OWNER=${GITHUB_OWNER:-forgeerp}
+      - GITHUB_REPO=${GITHUB_REPO:-forgeerp}
+      - CORS_ORIGINS=http://localhost:8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  data:
+

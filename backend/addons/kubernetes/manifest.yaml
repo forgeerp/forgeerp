@@ -1,0 +1,6 @@
+name: Kubernetes
+description: Kubernetes deployment implementation
+category: addon
+version: 0.1.0
+depends: []
+

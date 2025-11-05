@@ -1,0 +1,6 @@
+name: Database
+description: Base module for database patterns
+category: addon
+version: 0.1.0
+depends: []
+

@@ -1,0 +1,7 @@
+name: Fix
+description: Automatic issue fixing implementation
+category: addon
+version: 0.1.0
+depends:
+  - diagnosis
+

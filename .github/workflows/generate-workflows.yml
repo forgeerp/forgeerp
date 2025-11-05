@@ -1,0 +1,83 @@
+name: Generate GitHub Workflows
+
+on:
+  workflow_dispatch:
+    inputs:
+      client_id:
+        description: 'Client ID'
+        required: true
+        type: string
+
+jobs:
+  generate:
+    name: Generate Workflows for Client
+    runs-on: self-hosted
+    labels: [contabo, self-hosted, linux, x64]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Generate workflows
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: ./backend
+        run: |
+          python -c "
+          import os
+          import sys
+          sys.path.insert(0, '.')
+          from forgeerp.core.engine.github_generator.workflows import GitHubWorkflowGenerator
+          from forgeerp.core.database.database import get_session
+          from forgeerp.core.database.models.client import Client
+          from forgeerp.core.database.models.module import ClientModule, Module
+          from sqlmodel import select
+          
+          client_id = int(os.getenv('CLIENT_ID', '${{ inputs.client_id }}'))
+          session = next(get_session())
+          
+          client = session.get(Client, client_id)
+          if not client:
+              print(f'Client {client_id} not found')
+              sys.exit(1)
+          
+          # Get installed modules
+          statement = select(ClientModule).where(ClientModule.client_id == client_id)
+          client_modules = session.exec(statement).all()
+          installed_modules = []
+          for cm in client_modules:
+              module = session.get(Module, cm.module_id)
+              if module:
+                  installed_modules.append(module.name)
+          
+          # Generate workflows
+          generator = GitHubWorkflowGenerator('.')
+          generator.generate_workflows_for_client(
+              {'client_name': client.code, 'environments': ['dev', 'hml', 'prod']},
+              installed_modules
+          )
+          
+          print(f'Generated workflows for client {client.code}')
+          print(f'Installed modules: {installed_modules}')
+          "
+      
+      - name: Commit and push workflows
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/*.yml
+          git diff --staged --quiet || git commit -m "Generate workflows for client ${{ inputs.client_id }}"
+          git push
+

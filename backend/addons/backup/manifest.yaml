@@ -1,0 +1,6 @@
+name: Backup
+description: Backup automation implementation
+category: addon
+version: 0.1.0
+depends: []
+

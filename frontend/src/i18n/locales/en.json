@@ -1,0 +1,80 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "update": "Update",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Submit",
+    "loginSuccess": "Login successful",
+    "loginFailed": "Login failed",
+    "defaultCredentials": "Default credentials: <strong>admin</strong> / <strong>admin</strong>"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "clients": "Clients",
+    "user": "User",
+    "status": "Status",
+    "active": "Active",
+    "recentClients": "Recent Clients"
+  },
+  "clients": {
+    "title": "Clients",
+    "newClient": "New Client",
+    "editClient": "Edit Client",
+    "name": "Name",
+    "code": "Code",
+    "email": "Email",
+    "domain": "Domain",
+    "namespacePrefix": "Namespace Prefix",
+    "status": "Status",
+    "actions": "Actions",
+    "noClients": "No clients registered",
+    "nameRequired": "Name is required",
+    "codeRequired": "Code is required",
+    "codeCannotBeChanged": "Code cannot be changed after creation",
+    "namespacePrefixHint": "Used for namespaces (e.g., client-dev, client-prod)",
+    "deleteConfirm": "Are you sure you want to delete this client?",
+    "deleteSuccess": "Client deleted successfully",
+    "deleteError": "Failed to delete client",
+    "createSuccess": "Client created successfully",
+    "createError": "Failed to create client",
+    "updateSuccess": "Client updated successfully",
+    "updateError": "Failed to update client"
+  },
+  "configurations": {
+    "title": "Configurations",
+    "newConfiguration": "New Configuration",
+    "editConfiguration": "Edit Configuration",
+    "key": "Key",
+    "value": "Value",
+    "valueType": "Value Type",
+    "description": "Description",
+    "noConfigurations": "No configurations",
+    "createSuccess": "Configuration created successfully",
+    "createError": "Failed to create configuration",
+    "updateSuccess": "Configuration updated successfully",
+    "updateError": "Failed to update configuration",
+    "deleteSuccess": "Configuration deleted successfully",
+    "deleteError": "Failed to delete configuration"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "configurations": "Configurations"
+  }
+}
+
